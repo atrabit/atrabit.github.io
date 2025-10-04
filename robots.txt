@@ -1,5 +1,3 @@
 User-agent: *
-Disallow: 
-/css
-/js
-/vendor
+Allow: /
+
