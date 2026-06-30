@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 
 <head>
   <link rel="canonical" href="http://www.atrabit.com/index.html" />
@@ -23,10 +23,78 @@
   <link rel="apple-touch-icon" sizes="120x120" href="./icons/apple-touch-icon-120x120.png" />
   <link rel="apple-touch-icon" sizes="144x144" href="./icons/apple-touch-icon-144x144.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="./icons/apple-touch-icon-152x152.png" />
-  <link rel="alternate" hreflang="en" href="https://www.atrabit.com/en/" />
-  <link rel="alternate" hreflang="pl" href="https://www.atrabit.com/pl/" />
+  <link rel="alternate" hreflang="en" href="https://www.atrabit.com/index.html" />
+  <link rel="alternate" hreflang="pl" href="https://www.atrabit.com/pl_index.html/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.atrabit.com/index.html">
  
   <title>Atrabit - Electronics Engineering Services</title>
+    <script>
+        (function() {
+            const savedLanguage = localStorage.getItem('atrabit-language');
+            
+            if (savedLanguage === 'pl') {                
+                if (!window.location.pathname.includes('pl_index')) {
+                    window.location.href = '/pl_index.html';
+                }
+            } else if (!savedLanguage) {
+                const browserLanguage = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+                
+                if (browserLanguage === 'pl' && !window.location.pathname.includes('pl_index')) {
+                    localStorage.setItem('atrabit-language', 'pl');
+                    window.location.href = '/pl_index.html';
+                } else {
+                    localStorage.setItem('atrabit-language', 'en');
+                }
+            }
+        })();
+    </script>
+	 <style>
+        /* Language Switcher Styles */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .language-switcher .lang-btn {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            margin: 0;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #333;
+        }
+
+        .language-switcher .lang-btn:hover {
+            border-color: #999;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .language-switcher .lang-btn.active {
+            background-color: #0090ff;
+            color: white;
+            border-color: #0090ff;
+        }
+
+        .language-switcher .lang-btn img {
+            height: 14px;
+            width: auto;
+            display: inline-block;
+        }
+
+        .language-separator {
+            color: #ccc;
+            font-size: 12px;
+        }
+    </style>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,11 +110,10 @@
   <!-- Custom styles for this template -->
   <link href="css/creative.min.css" rel="stylesheet">
 
-  <script type="text/javascript">
-    
-    	window.onblur = function () { document.title = 'Atrabit'; }
-       window.onfocus = function () { document.title = 'Atrabit - Electronics Engineering Services'; }
-    </script>
+  <script type="text/javascript">    
+    window.onblur = function () { document.title = 'Atrabit'; }
+    window.onfocus = function () { document.title = 'Atrabit - Electronics Engineering Services'; }
+  </script>
 
 </head>
 
@@ -75,7 +142,13 @@
           </li>
 		  <li class="nav-item">
 	     	  <ul class="nav navbar-nav navbar-right">
-              <li class="nav-item"> <a class="nav-link" href="pl_index.html"><span><img src="img/pol.png"  height="20px" width="20px"></span> Polski</a></li>
+				<li class="nav-item"> 
+					<div class="language-switcher">
+						<button class="lang-btn" id="lang-en" data-lang="en" aria-label="Switch to English"><img src="img/eng.png" alt="UK flag">EN</button>
+					<span class="language-separator">|</span>
+						<button class="lang-btn active" id="lang-pl" data-lang="pl" aria-label="Switch to Polish">	<img src="img/pol.png" alt="Polish flag"> PL</button>
+					</div>
+				</li>
             </ul>           
           </li>
         </ul>
@@ -93,8 +166,7 @@
           <hr>
         </div>
         <div class="col-lg-8 mx-auto">
-          <p class="text-faded mb-5">Atrabit is the business name used by Maciej Skrzypczak for his various projects.
-             It's a sole proprietership focused on engineering consulting in embedded electronic world, helping companies in fast prototyping of new ideas.
+          <p class="text-faded mb-5">Atrabit operates since 2017 and is focused on engineering consulting in embedded electronic world, helping companies in fast prototyping of new ideas.
           </p>
           <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
         </div>
@@ -323,7 +395,7 @@
           <hr class="my-4">
           <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
           <p class="mb-5">Company details: <br> REGON: 366734649 || PL VAT: 6981568937 || DUNS&reg: 438210992.</p> 
-          <p> Company address: <a href="https://goo.gl/maps/qY5q8Fa68dCSK89v7"> Nowy Kisielin Sosnowa 24, 66-002 Zielona Gora, Poland</a></p>
+          <p> Company address: <a href="https://goo.gl/maps/qY5q8Fa68dCSK89v7"> Nowy Kisielin-Sosnowa 24, 66-002 Zielona Gora, Poland</a></p>
         </div>
       </div>
       <div class="row">
@@ -356,7 +428,159 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/creative.min.js"></script>
+ 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all language switching buttons
+            const langButtons = document.querySelectorAll('[data-lang]');
+            
+            // Add click handler to each button
+            langButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const selectedLanguage = this.getAttribute('data-lang');
+                    
+                    // Save user's language preference
+                    localStorage.setItem('atrabit-language', selectedLanguage);
+                    
+                    // Redirect to appropriate page
+                    if (selectedLanguage === 'pl') {
+                        window.location.href = '/pl_index.html';
+                    } else {
+                        window.location.href = '/index.html';
+                    }
+                });
+            });
+            
+            // Update active button styling
+            const currentLanguage = localStorage.getItem('atrabit-language') || 'en';
+            document.querySelectorAll('[data-lang]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${currentLanguage}"]`).classList.add('active');
+        });
+    </script> 
   
+  <!-- SCHEMA.ORG Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Atrabit",
+        "description": "Electronics Engineering Services - Design, Prototyping, and Embedded Systems",
+        "url": "https://www.atrabit.com",
+		"logo": "https://www.atrabit.com/img/logo_big.png",
+        "telephone": "+48790567106",
+        "email": "info@atrabit.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Nowy Kisielin-Sosnowa 24",
+            "addressLocality": "Zielona Góra",
+            "postalCode": "66-002",
+            "addressCountry": "PL"
+        },
+        "availableLanguage": ["en", "pl"],
+        "areaServed": ["PL", "EU"],
+        "serviceType": "Electronics Engineering & Prototyping",
+		"hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "Core Electronics Services",
+			"itemListElement": [
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Electronics hardware design"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "PCB layout engineering"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Embedded firmware development"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Rapid electronics prototyping"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "PCB prototype assembly"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "IoT device development"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Embedded Systems design"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "CNC Machining of metal parts"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "CNC machining of plastic parts"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "3D printing"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Laser engraving"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Laser cutting"
+				}
+			},		
+			{
+				"@type": "Offer",
+				"itemOffered": {
+				"@type": "Service",
+				"name": "Foam inserts"
+				}
+			}
+		]
+	  }
+    }
+    </script>  
 </body>
-
 </html>
